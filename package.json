@@ -1,0 +1,21 @@
+{
+  "name": "http-requests-http-client",
+  "version": "1.0.0",
+  "description": "github-avatar-downloader-project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test avatar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github-avatar-downloader"
+  },
+  "keywords": [
+    "gitava"
+  ],
+  "author": "RyanKendrick",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
