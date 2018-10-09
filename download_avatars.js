@@ -7,7 +7,7 @@ var https = require('https');
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
-function getRepoContributors(repoOwner, repoName, cb) {
+function getRepoContributors(repoOwner, repoName, callback) {
     var url = "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors";
     var options = {
       url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
@@ -18,9 +18,9 @@ function getRepoContributors(repoOwner, repoName, cb) {
   };
   request(options, function(err, res, body) {
     // parse the JSON string into an object and pass this object
-    //(an array of contributor objects) to the cb function.
+    //(an array of contributor objects) to the callback function.
     var parse = JSON.parse(body);
-    cb(err, parse);
+    callback(err, parse);
   });
 }
 
@@ -28,11 +28,18 @@ function getRepoContributors(repoOwner, repoName, cb) {
 getRepoContributors("jquery", "jquery", function(err, result) {
   //console.log(result);
   for (var i = 0; i < result.length; i++) {
-    console.log(result[i]["avatar_url"]);
+    var avurl = result[i]["avatar_url"];
+    var file = "./avatars/" + result[i]["login"] + ".jpg";
+    downloadImageByURL(avurl, file);
   };
   console.log("Errors:", err);
   // console.log("Result:", result);
 });
+
+function downloadImageByURL(url, filePath) {
+  request(url).pipe(fs.createWriteStream(filePath))
+
+}
 
 
 
